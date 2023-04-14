@@ -7,9 +7,6 @@ bot = telebot.TeleBot('5990736399:AAGEsp1ZvZVabyDJ9jELJLHBX2FQ3g1WzZg')
 def parselocation(message):
     longitude = message.location.longitude
     latitude = message.location.latitude
-    print('parsed')
-    print(longitude, latitude)
-    print('finished parsing')
     return str(longitude), str(latitude)
 
 
