@@ -2,7 +2,7 @@ import telebot
 import weather
 import credentials
 
-# init
+
 bot = telebot.TeleBot(credentials.key())
 
 
