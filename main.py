@@ -1,7 +1,8 @@
 import telebot
 import weather
+import credentials
 
-bot = telebot.TeleBot('5990736399:AAGEsp1ZvZVabyDJ9jELJLHBX2FQ3g1WzZg')
+bot = telebot.TeleBot(credentials.key())
 
 
 def parselocation(message):
@@ -13,9 +14,9 @@ def parselocation(message):
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = telebot.types.KeyboardButton("Что сейчас с погодой?", request_location=True)
+    btn1 = telebot.types.KeyboardButton("What's going on the the street?", request_location=True)
     markup.add(btn1)
-    bot.send_message(message.chat.id, text="Привет, {0.first_name}! Я расскажу про погоду... (но мне нужны твои координаты)".format(message.from_user), reply_markup=markup)
+    bot.send_message(message.chat.id, text="Hi, {0.first_name}! Let me take a look... (but i need your geopsoition)".format(message.from_user), reply_markup=markup)
 
 
 @bot.message_handler(content_types=['location'])
@@ -24,7 +25,7 @@ def get_text_messages(message):
     print(location)
 
     req = weather.getcurrentweather(location[0], location[1])
-    bot.send_message(message.from_user.id, f"Cейчас {req}°C")
+    bot.send_message(message.from_user.id, f"Now is {req}°C")
 
 
 bot.polling(none_stop=True, interval=0)
